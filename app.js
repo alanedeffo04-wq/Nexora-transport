@@ -15,7 +15,7 @@ for (let i = 1; i <= 10; i++) VEHICLES.push({ id: `berline-${String(i).padStart(
 [[15, 'minibus-15', 90000], [30, 'minibus-30', 150000], [20, 'minibus-20', 110000]].forEach(([s, id, p]) =>
   VEHICLES.push({ id, name: `Minibus ${s} places`, nameEn: `Minibus ${s} seats`, cat: 'minibus', seats: s, price: p, gearbox: 'manual', ac: true, gps: false }));
 VEHICLES.forEach(v => v.img = `images/${v.id}.jpg`);
-const FEATURED = ['suv-01', 'berline-01', 'minibus-15'];
+const FEATURED = ['suv-01', 'berline-01', 'suv-02', 'minibus-15'];
 
 /* ================= TRADUCTIONS ================= */
 const I18N = {
