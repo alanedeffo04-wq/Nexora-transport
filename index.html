@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NEXORA — Location & transport de véhicules</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a href="#/home" class="logo"><img src="logo.png" alt="NEXORA" onerror="this.replaceWith(Object.assign(document.createElement('b'),{textContent:'NEXORA'}))"></a>
+    <nav id="menu" class="menu">
+      <a href="#/home" data-route="home" data-i18n="nav_home"></a>
+      <a href="#/catalogue" data-route="catalogue" data-i18n="nav_catalogue"></a>
+      <a href="#/needs" data-route="needs" data-i18n="nav_needs"></a>
+      <a href="#/contact" data-route="contact" data-i18n="nav_contact"></a>
+    </nav>
+    <div class="nav-r">
+      <div class="lang"><button data-lang="fr" class="on">FR</button><button data-lang="en">EN</button></div>
+      <a href="#/catalogue" class="btn btn-main nav-cta" data-i18n="book"></a>
+      <button class="burger" id="burger" aria-label="Menu"><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="app">
+  <!-- ACCUEIL -->
+  <section data-page="home">
+    <div class="hero">
+      <div class="wrap hero-in">
+        <span class="kicker" data-i18n="hero_kicker"></span>
+        <h1 data-i18n="hero_title"></h1>
+        <p data-i18n="hero_text"></p>
+        <div class="row">
+          <a href="#/catalogue" class="btn btn-gold" data-i18n="discover"></a>
+          <a href="#/catalogue" class="btn btn-ghost" data-i18n="book_vehicle"></a>
+        </div>
+      </div>
+    </div>
+    <div class="wrap section reveal">
+      <div class="intro">
+        <h2 data-i18n="intro_title"></h2><span class="line"></span>
+        <p data-i18n="intro_text"></p>
+      </div>
+    </div>
+    <div class="wrap section reveal">
+      <div class="head"><h2 data-i18n="featured"></h2><a href="#/catalogue" class="link" data-i18n="see_all"></a></div>
+      <div class="grid" id="featured"></div>
+    </div>
+    <div class="wrap section reveal">
+      <div class="cta">
+        <div><h2 data-i18n="cta_title"></h2><p data-i18n="cta_text"></p></div>
+        <div class="row"><a href="#/catalogue" class="btn btn-gold" data-i18n="discover"></a><a href="#/needs" class="btn btn-ghost" data-i18n="make_request"></a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATALOGUE -->
+  <section data-page="catalogue" hidden>
+    <div class="wrap section">
+      <h1 class="ptitle" data-i18n="cat_title"></h1><span class="line"></span>
+      <p class="sub" data-i18n="cat_sub"></p>
+      <div class="filters">
+        <input type="search" id="q" data-i18n-ph="search">
+        <select id="fCat"><option value="all" data-i18n="all_cat"></option><option value="suv">SUV</option><option value="berline" data-i18n="berlines"></option><option value="minibus" data-i18n="minibus"></option></select>
+        <select id="fSeats"><option value="0" data-i18n="all_seats"></option><option value="5">5+</option><option value="7">7+</option><option value="15">15+</option><option value="30">30+</option></select>
+        <select id="fPrice"><option value="0" data-i18n="all_price"></option><option value="40000">≤ 40 000</option><option value="60000">≤ 60 000</option><option value="100000">≤ 100 000</option></select>
+      </div>
+      <p class="count" id="count"></p>
+      <div class="grid" id="catalogue"></div>
+    </div>
+  </section>
+
+  <!-- FICHE -->
+  <section data-page="vehicle" hidden><div class="wrap section" id="vehicle"></div></section>
+
+  <!-- RÉSERVATION -->
+  <section data-page="booking" hidden>
+    <div class="wrap section narrow">
+      <h1 class="ptitle" data-i18n="book_title"></h1><span class="line"></span>
+      <p class="sub" id="bkVehicle"></p>
+      <form id="bookForm" class="card form" novalidate>
+        <div class="two"><label><span data-i18n="lastname"></span><input name="nom" required></label><label><span data-i18n="firstname"></span><input name="prenom" required></label></div>
+        <div class="two"><label><span data-i18n="phone"></span><input name="tel" type="tel" required></label><label><span data-i18n="email"></span><input name="email" type="email" required></label></div>
+        <label><span data-i18n="vehicle"></span><select name="veh" id="bkSelect"></select></label>
+        <div class="three"><label><span data-i18n="d_start"></span><input name="d1" type="date" required></label><label><span data-i18n="d_end"></span><input name="d2" type="date" required></label><label><span data-i18n="h_start"></span><input name="heure" type="time" required></label></div>
+        <div class="three"><label><span data-i18n="from"></span><input name="lieu" required></label><label><span data-i18n="to"></span><input name="dest" required></label><label><span data-i18n="pax"></span><input name="pax" type="number" min="1" required></label></div>
+        <label><span data-i18n="more"></span><textarea name="info" rows="3"></textarea></label>
+        <div class="recap" id="recap"></div>
+        <p class="err" id="bkErr"></p>
+        <button class="btn btn-wa" type="submit"><i data-lucide="message-circle"></i><span data-i18n="send_wa"></span></button>
+        <p class="note" data-i18n="not_confirmed"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- BESOINS SPÉCIFIQUES -->
+  <section data-page="needs" hidden>
+    <div class="wrap section narrow">
+      <h1 class="ptitle" data-i18n="needs_title"></h1><span class="line"></span>
+      <p class="sub" data-i18n="needs_sub"></p>
+      <ul class="chips"><li data-i18n="n1"></li><li data-i18n="n2"></li><li data-i18n="n3"></li><li data-i18n="n4"></li><li data-i18n="n5"></li></ul>
+      <form id="needsForm" class="card form" novalidate>
+        <div class="two"><label><span data-i18n="lastname"></span><input name="nom" required></label><label><span data-i18n="firstname"></span><input name="prenom" required></label></div>
+        <div class="two"><label><span data-i18n="phone"></span><input name="tel" type="tel" required></label><label><span data-i18n="email"></span><input name="email" type="email" required></label></div>
+        <label><span data-i18n="need_desc"></span><textarea name="desc" rows="5" required></textarea></label>
+        <label class="drop"><i data-lucide="image-plus"></i><b data-i18n="attach"></b><small id="fileName" data-i18n="optional"></small><input type="file" id="file" accept="image/*,.pdf" hidden></label>
+        <p class="err" id="ndErr"></p>
+        <button class="btn btn-wa" type="submit"><i data-lucide="message-circle"></i><span data-i18n="send_wa"></span></button>
+        <p class="note" data-i18n="attach_note"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section data-page="contact" hidden>
+    <div class="wrap section">
+      <h1 class="ptitle" data-i18n="contact_title"></h1><span class="line"></span>
+      <div class="contact">
+        <div class="cinfo">
+          <h3 data-i18n="reach"></h3>
+          <p><i data-lucide="phone"></i><span class="wa-num"></span></p>
+          <p><i data-lucide="mail"></i><span class="mail-txt"></span></p>
+          <div class="row"><a class="btn btn-wa wa-link" target="_blank" rel="noopener"><i data-lucide="message-circle"></i>WhatsApp</a><a class="btn btn-ghost mail-link"><i data-lucide="mail"></i>E-mail</a></div>
+        </div>
+        <form id="contactForm" class="card form" novalidate>
+          <label><span data-i18n="lastname"></span><input name="nom" required></label>
+          <label><span data-i18n="email"></span><input name="email" type="email"></label>
+          <label><span data-i18n="message"></span><textarea name="msg" rows="4" required></textarea></label>
+          <p class="err" id="ctErr"></p>
+          <button class="btn btn-main" type="submit" data-i18n="send"></button>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap foot-grid">
+    <div><img src="logo.png" alt="NEXORA" class="flogo" onerror="this.outerHTML='<b>NEXORA</b>'"><p data-i18n="foot_text"></p></div>
+    <div><h4 data-i18n="links"></h4><a href="#/home" data-i18n="nav_home"></a><a href="#/catalogue" data-i18n="nav_catalogue"></a><a href="#/needs" data-i18n="nav_needs"></a><a href="#/contact" data-i18n="nav_contact"></a></div>
+    <div><h4>Contact</h4><a class="wa-link" target="_blank" rel="noopener"><span class="wa-num"></span></a><a class="mail-link"><span class="mail-txt"></span></a><div class="socials" id="socials"></div></div>
+  </div>
+  <div class="wrap legal"><a href="#" data-i18n="legal"></a><a href="#" data-i18n="privacy"></a><a href="#" data-i18n="terms"></a></div>
+</footer>
+<script src="https://unpkg.com/lucide@0.383.0/dist/umd/lucide.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
